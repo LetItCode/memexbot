@@ -5,7 +5,6 @@
   "main": "src/app.js",
   "scripts": {
     "dev": "DEBUG=memex:* nodemon -w src src/app.js",
-    "cwapi-test": "DEBUG=memex:* nodemon test/cwapi.js",
     "start": "node -w src src/app.js"
   },
   "author": "Josh Dies",
