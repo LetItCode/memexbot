@@ -14,7 +14,7 @@ const i18n = new TelegrafI18n({
   directory: path.resolve(__dirname, 'locales')
 })
 
-module.exports = async (botToken, cache, cw) => {
+module.exports = async (botToken, cache, database, cw) => {
   class CustomContext extends Telegraf.Context {
     async replyWithPhoto (opts, ...extra) {
       let fileId = ''
@@ -37,6 +37,7 @@ module.exports = async (botToken, cache, cw) => {
     images: cache('image')
   }
   bot.context.h = helpers
+  bot.context.db = database
   bot.context.cw = cw
 
   const sessionConfig = { store: sessionStore(cache) }

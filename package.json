@@ -16,6 +16,7 @@
     "dotenv": "^8.2.0",
     "kafka-node": "^5.0.0",
     "level": "^6.0.1",
+    "mongoose": "^5.9.18",
     "parse-fn-args": "^1.0.1",
     "subleveldown": "^5.0.0",
     "telegraf": "^3.38.0",

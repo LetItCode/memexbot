@@ -6,6 +6,9 @@ const ioc = require('./lib/diContainer')()
 
 ioc.register('cache', require('./level'))
 
+ioc.register('mongoUri', process.env.MONGO_URI)
+ioc.factory('database', require('./mongo'))
+
 ioc.register('cwApiToken', process.env.CWAPI_TOKEN)
 ioc.factory('cw', require('./cw'))
 
