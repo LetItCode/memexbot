@@ -14,7 +14,9 @@ module.exports = mongoUri => {
     telegramId: Number,
     username: String,
     firstName: String,
-    lastName: String
+    lastName: String,
+    token: String,
+    grants: []
   })
 
   database.User = mongoose.model('User', userSchema)
