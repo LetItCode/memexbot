@@ -3,5 +3,5 @@ buttons:
   folio: 📖
   auth: 🔑
   language: 🌏
-greeting: Hi
+greeting: Hi ${name}!
 settings: Settings

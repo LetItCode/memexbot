@@ -11,6 +11,7 @@ const { greet, settings } = require('./handlers')
 const { match } = TelegrafI18n
 const i18n = new TelegrafI18n({
   defaultLanguage: 'ru',
+  defaultLanguageOnMissing: true,
   directory: path.resolve(__dirname, 'locales')
 })
 
