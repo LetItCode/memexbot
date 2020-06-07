@@ -465,6 +465,6 @@ const CwApi = class {
 }
 
 module.exports = {
-  ...constants,
+  constants,
   CwApi
 }
