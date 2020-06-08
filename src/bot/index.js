@@ -1,5 +1,5 @@
 const debug = require('debug')('memex:app')
-const { Telegraf, session } = require('telegraf')
+const { Telegraf, Composer, session } = require('telegraf')
 const TelegrafI18n = require('telegraf-i18n')
 const TelegrafWidget = require('telegraf-widget')
 const path = require('path')
@@ -45,8 +45,13 @@ module.exports = async (botToken, cache, database, cw) => {
 
   bot.use(session(sessionConfig), i18n, new TelegrafWidget(widgets))
 
-  bot.command('start', greet)
-  bot.hears(['/settings', match('buttons.settings')], settings)
+  const privateMode = new Composer()
+  privateMode.command('start', greet)
+  privateMode.hears(['/settings', match('buttons.settings')], settings)
+
+  const groupMode = new Composer()
+
+  bot.use(Composer.privateChat(privateMode), Composer.groupChat(groupMode))
 
   bot.catch(debug)
   bot.launch()
