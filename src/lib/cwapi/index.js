@@ -464,7 +464,4 @@ const CwApi = class {
   }
 }
 
-module.exports = {
-  constants,
-  CwApi
-}
+module.exports = Object.assign(CwApi, { CwApi, constants })
