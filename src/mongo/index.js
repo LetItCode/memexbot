@@ -16,7 +16,7 @@ module.exports = mongoUri => {
     firstName: String,
     lastName: String,
     token: String,
-    grants: []
+    grants: [String]
   })
 
   database.User = mongoose.model('User', userSchema)
