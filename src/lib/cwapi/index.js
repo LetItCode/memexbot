@@ -145,7 +145,7 @@ const CwApi = class {
     check(cache.resolve, cache.reject)
 
     function check (resolve, reject) {
-      return result === Results.OK ? resolve(payload) : reject(new Error(result))
+      return result === Results.OK ? resolve(message) : reject(new Error(result))
     }
   }
 
