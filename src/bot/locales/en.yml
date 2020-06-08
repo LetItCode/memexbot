@@ -5,3 +5,5 @@ buttons:
   language: 🌏
 greeting: Hi ${name}!
 settings: Settings
+auth:
+  pending: You should get message in CW with authcode. Please forward entire message here.
