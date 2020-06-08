@@ -45,8 +45,8 @@ module.exports = async (botToken, cache, database, cw) => {
 
   bot.use(session(sessionConfig), i18n, new TelegrafWidget(widgets))
 
-  bot.hears(['/settings', match('buttons.settings')], settings)
   bot.command('start', greet)
+  bot.hears(['/settings', match('buttons.settings')], settings)
 
   bot.catch(debug)
   bot.launch()
