@@ -1,4 +1,4 @@
-const debug = require('debug')('memex:app')
+const debug = require('debug')('memex:bot')
 const { Telegraf, Composer, session } = require('telegraf')
 const TelegrafI18n = require('telegraf-i18n')
 const TelegrafWidget = require('telegraf-widget')
@@ -6,7 +6,8 @@ const path = require('path')
 const sessionStore = require('./store')
 const helpers = require('./helpers')
 const widgets = require('./widgets')
-const { greet, settings } = require('./handlers')
+const { cwForward } = require('./middleware')
+const { greet, settings, auth, grant } = require('./handlers')
 
 const { match } = TelegrafI18n
 const i18n = new TelegrafI18n({
@@ -48,6 +49,8 @@ module.exports = async (botToken, cache, database, cw) => {
   const privateMode = new Composer()
   privateMode.command('start', greet)
   privateMode.hears(['/settings', match('buttons.settings')], settings)
+  privateMode.hears(/^\/(?<cmd>auth(_revoke|_restart)?)(_(?<param>profile|stock|gear))?$/, auth)
+  privateMode.hears(/^Code (?<code>\d{6}) to authorize.+:\n?(?<grants>.+)?/s, cwForward(grant))
 
   const groupMode = new Composer()
 
