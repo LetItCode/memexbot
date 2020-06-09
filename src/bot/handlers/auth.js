@@ -48,4 +48,21 @@ module.exports = async ctx => {
       debug('Auth revoke error:', err)
     }
   }
+
+  if (cmd === 'auth_restart') {
+    console.log(authType)
+    try {
+      const res = await cw.createAuthCode(from.id)
+
+      session.auth = { pending: true, type: authType, uuid: res.uuid }
+
+      db.User.updateOne({ telegramId: from.id }, { grants: [] }).exec()
+
+      const text = i18n.t('auth.pending')
+
+      return replyWithHTML(text)
+    } catch (err) {
+      debug('Auth error:', err)
+    }
+  }
 }
