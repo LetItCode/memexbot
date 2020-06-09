@@ -11,7 +11,7 @@ const settingsWidget = new Widget('settings', 'auth')
 settingsWidget.on(Pages.AUTH, async ctx => {
   const { from, reply, editMessageText, answerCbQuery, widget, i18n, db, cw } = ctx
 
-  const Grants = { ...cw.Operations, AUTH: 'auth' }
+  const Grants = { ...cw.Operations, AUTH: 'Auth' }
 
   const page = widget.query && widget.query.page
 

@@ -5,7 +5,7 @@ module.exports = async ctx => {
   const { match, from, replyWithHTML, session, i18n, db, cw } = ctx
   const { code, grants = '' } = match.groups
 
-  const Grants = { ...cw.Operations, AUTH: 'auth' }
+  const Grants = { ...cw.Operations, AUTH: 'Auth' }
 
   const user = await db.User.findOne({ telegramId: from.id })
   if (!user) return safePassThru()
