@@ -19,12 +19,12 @@ settingsWidget.on(Pages.AUTH, async ctx => {
   if (!user) return safePassThru()
   const { grants } = user
 
-  console.log(grants.includes(Grants.PROFILE))
   let text = i18n.t('settings.auth.title') + '\n\n'
   text += i18n.t('settings.auth.text') + '\n\n'
   if (grants.includes(Grants.AUTH)) {
     text += i18n.t(`settings.auth.profile.${grants.includes(Grants.PROFILE) ? 'off' : 'on'}`) + '\n'
-    text += i18n.t(`settings.auth.stock.${grants.includes(Grants.STOCK) ? 'off' : 'on'}`)
+    text += i18n.t(`settings.auth.stock.${grants.includes(Grants.STOCK) ? 'off' : 'on'}`) + '\n'
+    text += i18n.t(`settings.auth.gear.${grants.includes(Grants.GEAR) ? 'off' : 'on'}`)
   } else {
     text += i18n.t('settings.auth.auth')
   }

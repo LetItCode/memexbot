@@ -15,7 +15,7 @@ module.exports = async ctx => {
   let authType = Grants.AUTH
   if (grants.includes('profile')) authType = Grants.PROFILE
   if (grants.includes('stock')) authType = Grants.STOCK
-  if (grants.includes('gear')) authType = Grants.Gear
+  if (grants.includes('gear')) authType = Grants.GEAR
   if (session.auth.type !== authType) return safePassThru()
 
   try {
