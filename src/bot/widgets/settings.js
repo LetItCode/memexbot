@@ -6,7 +6,7 @@ const Pages = {
   LANGUAGE: 'language'
 }
 
-const settingsWidget = new Widget('settings', 'auth')
+const settingsWidget = new Widget('settings', Pages.AUTH)
 
 settingsWidget.on(Pages.AUTH, async ctx => {
   const { from, reply, editMessageText, answerCbQuery, widget, i18n, db, cw } = ctx
