@@ -7,7 +7,7 @@ const sessionStore = require('./store')
 const helpers = require('./helpers')
 const widgets = require('./widgets')
 const { cwForward } = require('./middleware')
-const { greet, settings, auth, grant } = require('./handlers')
+const { greet, settings, auth, grant, folio, search } = require('./handlers')
 
 const { match } = TelegrafI18n
 const i18n = new TelegrafI18n({
@@ -46,11 +46,14 @@ module.exports = async (botToken, cache, database, cw) => {
 
   bot.use(session(sessionConfig), i18n, new TelegrafWidget(widgets))
 
+  bot.on('inline_query', search)
+
   const privateMode = new Composer()
   privateMode.command('start', greet)
   privateMode.hears(['/settings', match('buttons.settings')], settings)
   privateMode.hears(/^\/(?<cmd>auth(_revoke|_restart)?)(_(?<param>profile|stock|gear))?$/, auth)
   privateMode.hears(/^Code (?<code>\d{6}) to authorize.+:\n?(?<grants>.+)?/s, cwForward(grant))
+  privateMode.hears(['/folio', match('buttons.folio')], folio)
 
   const groupMode = new Composer()
 
