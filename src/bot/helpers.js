@@ -25,6 +25,8 @@ h.fullName = from =>
 
 h.pause = delay => new Promise(resolve => setTimeout(resolve, delay))
 
+h.last = a => a[a.length - 1]
+
 // Private
 function escapeHTMLChar (c) {
   switch (c) {
