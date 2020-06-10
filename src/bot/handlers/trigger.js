@@ -3,6 +3,7 @@ const { safePassThru } = require('telegraf')
 const Triggers = {
   TEXT: 'text',
   STICKER: 'sticker',
+  PHOTO: 'photo',
   ANIMATION: 'animation'
 }
 
@@ -23,6 +24,8 @@ module.exports = async ctx => {
       answer = { type: Triggers.TEXT, text }
     } else if (targetMessage.sticker) {
       answer = { type: Triggers.STICKER, text: targetMessage.sticker.file_id }
+    } else if (targetMessage.photo) {
+      answer = { type: Triggers.PHOTO, text: h.last(targetMessage.photo).file_id }
     } else if (targetMessage.animation) {
       answer = { type: Triggers.ANIMATION, text: targetMessage.animation.file_id }
     }
@@ -33,14 +36,14 @@ module.exports = async ctx => {
       { upsert: true }
     )
 
-    const text = i18n.t('trigger.add')
+    const text = i18n.t('triggers.add')
     if (res.ok) return replyWithHTML(text)
   }
 
   if (cmd === 'trigger_remove') {
     const res = await db.Trigger.deleteOne({ chatId: chat.id, trigger })
 
-    const text = i18n.t('trigger.remove')
+    const text = i18n.t('triggers.remove')
     if (res.ok) return replyWithHTML(text)
   }
 }

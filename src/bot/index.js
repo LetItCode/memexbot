@@ -7,7 +7,7 @@ const sessionStore = require('./store')
 const helpers = require('./helpers')
 const widgets = require('./widgets')
 const { cwForward } = require('./middleware')
-const { greet, settings, auth, grant, folio, search, trigger, spy } = require('./handlers')
+const { greet, settings, auth, grant, folio, search, trigger, triggers, spy } = require('./handlers')
 
 const { match } = TelegrafI18n
 const i18n = new TelegrafI18n({
@@ -19,7 +19,7 @@ const i18n = new TelegrafI18n({
 module.exports = async (botToken, cache, database, cw) => {
   class CustomContext extends Telegraf.Context {
     async replyWithPhoto (opts, ...extra) {
-      let fileId = ''
+      let fileId = opts
       const file = opts && opts.source
       if (file) {
         fileId = await this.cache.images.get(opts.source).catch(debug)
@@ -57,6 +57,7 @@ module.exports = async (botToken, cache, database, cw) => {
 
   const groupMode = new Composer()
   groupMode.hears(/^\/(?<cmd>trigger(_remove)?) (?<trigger>.+)/, trigger)
+  groupMode.command('triggers', triggers)
   groupMode.on('text', spy)
 
   bot.use(Composer.privateChat(privateMode), Composer.groupChat(groupMode))
