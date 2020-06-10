@@ -41,6 +41,9 @@ module.exports = async (botToken, cache, database, cw) => {
   bot.context.h = helpers
   bot.context.db = database
   bot.context.cw = cw
+  bot.context.c = {
+    Grants: { ...cw.Operations, AUTH: 'Auth' }
+  }
 
   const sessionConfig = { store: sessionStore(cache) }
 
