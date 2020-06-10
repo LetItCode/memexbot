@@ -9,7 +9,7 @@ const Triggers = {
 module.exports = async ctx => {
   const { chat, message, replyWithHTML, replyWithSticker, replyWithAnimation, db } = ctx
 
-  const trigger = await db.Trigger.findOne({ chatId: chat.id, trigger: message.text })
+  const trigger = await db.Trigger.findOne({ chatId: chat.id, trigger: message.text.toLowerCase() })
   if (!trigger) return safePassThru()
 
   if (trigger.type === Triggers.TEXT) {

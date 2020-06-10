@@ -24,7 +24,11 @@ module.exports = async ctx => {
       answer = { type: Triggers.ANIMATION, text: targetMessage.animation.file_id }
     }
 
-    const res = await db.Trigger.updateOne({ chatId: chat.id, trigger }, answer, { upsert: true })
+    const res = await db.Trigger.updateOne(
+      { chatId: chat.id, trigger: trigger.toLowerCase() }, // prettier-ignore
+      answer,
+      { upsert: true }
+    )
 
     const text = i18n.t('trigger.add')
     if (res.ok) return replyWithHTML(text)
