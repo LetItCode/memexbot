@@ -28,6 +28,9 @@ module.exports = async ctx => {
       answer = { type: Triggers.PHOTO, text: h.last(targetMessage.photo).file_id }
     } else if (targetMessage.animation) {
       answer = { type: Triggers.ANIMATION, text: targetMessage.animation.file_id }
+    } else {
+      const text = i18n.t('triggers.unsupport')
+      return replyWithHTML(text)
     }
 
     const res = await db.Trigger.updateOne(
