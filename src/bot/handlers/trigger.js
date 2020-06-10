@@ -2,7 +2,8 @@ const { safePassThru } = require('telegraf')
 
 const Triggers = {
   TEXT: 'text',
-  STICKER: 'sticker'
+  STICKER: 'sticker',
+  ANIMATION: 'animation'
 }
 
 module.exports = async ctx => {
@@ -18,7 +19,9 @@ module.exports = async ctx => {
     if (targetMessage.text) {
       answer = { type: Triggers.TEXT, text: targetMessage.text }
     } else if (targetMessage.sticker) {
-      answer = { type: Triggers.STICKER, sticker: targetMessage.sticker }
+      answer = { type: Triggers.STICKER, text: targetMessage.sticker.file_id }
+    } else if (targetMessage.animation) {
+      answer = { type: Triggers.ANIMATION, text: targetMessage.animation.file_id }
     }
 
     const res = await db.Trigger.updateOne({ chatId: chat.id, trigger }, answer, { upsert: true })
