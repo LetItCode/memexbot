@@ -7,7 +7,7 @@ const Triggers = {
 }
 
 module.exports = async ctx => {
-  const { match, message, chat, replyWithHTML, i18n, db } = ctx
+  const { match, message, chat, replyWithHTML, i18n, db, h } = ctx
   const { cmd, trigger } = match.groups
 
   const targetMessage = message.reply_to_message
@@ -17,7 +17,10 @@ module.exports = async ctx => {
 
     let answer
     if (targetMessage.text) {
-      answer = { type: Triggers.TEXT, text: targetMessage.text }
+      const text = targetMessage.entities
+        ? h.formatHTML(targetMessage.text, targetMessage.entities)
+        : targetMessage.text
+      answer = { type: Triggers.TEXT, text }
     } else if (targetMessage.sticker) {
       answer = { type: Triggers.STICKER, text: targetMessage.sticker.file_id }
     } else if (targetMessage.animation) {
