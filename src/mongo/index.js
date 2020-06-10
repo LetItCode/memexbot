@@ -32,6 +32,16 @@ module.exports = mongoUri => {
 
   database.News = mongoose.model('News', newsSchema)
 
+  // Triggers
+  const triggerSchema = new mongoose.Schema({
+    trigger: String,
+    chatId: Number,
+    type: String,
+    text: String
+  })
+
+  database.Trigger = mongoose.model('Trigger', triggerSchema)
+
   // Export models like 'database'
   return database
 }
