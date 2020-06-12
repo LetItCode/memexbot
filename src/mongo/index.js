@@ -16,6 +16,7 @@ module.exports = mongoUri => {
     username: String,
     firstName: String,
     lastName: String,
+    gameId: String,
     token: String,
     grants: [String]
   })
